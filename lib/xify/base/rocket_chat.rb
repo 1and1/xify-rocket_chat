@@ -52,10 +52,15 @@ module Xify
 
         req = Net::HTTP::Post.new '/api/v1/login',
           'Content-Type' => 'application/json'
-        req.body = {
-          username: @config['user'],
-          password: @config['pass']
-        }.to_json
+
+        req.body = if @config.has_key? 'auth
+          @config['auth']
+        else
+          {
+            username: @config['user'],
+            password: @config['pass']
+          }
+        end.to_json
 
         res = @http.request req
 
