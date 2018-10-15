@@ -2,7 +2,7 @@ require 'date'
 
 Gem::Specification.new do |s|
   s.name        = 'xify-rocket_chat'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.date        = Date.today.to_s
   s.summary     = 'Rocket.Chat extension for Xify gem.'
   s.description = <<-EOF

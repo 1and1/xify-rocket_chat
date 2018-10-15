@@ -17,7 +17,7 @@ module Xify
               {
                 title: event.args[:parent],
                 title_link: event.args[:parent_link],
-                text: event.args[:link] ? "#{event.message.chomp} ([more](#{event.args[:link]}))" : event.message.chomp
+                text: event.args[:link] ? "#{event.message.chomp}\n\n([link to source](#{event.args[:link]}))" : event.message.chomp
               }
             ]
           }.to_json
