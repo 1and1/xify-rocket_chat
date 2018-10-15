@@ -53,7 +53,7 @@ module Xify
         req = Net::HTTP::Post.new '/api/v1/login',
           'Content-Type' => 'application/json'
 
-        req.body = if @config.has_key? 'auth
+        req.body = if @config.has_key? 'auth'
           @config['auth']
         else
           {
