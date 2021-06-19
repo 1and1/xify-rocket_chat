@@ -10,17 +10,25 @@ module Xify
       def process(event)
         request :post, '/api/v1/chat.postMessage' do |req|
           req['Content-Type'] = 'application/json'
-          req.body = {
-            channel: @config['channel'],
-            alias: event.author,
-            attachments: [
-              {
-                title: event.args[:parent],
-                title_link: event.args[:parent_link],
-                text: event.args[:link] ? "#{event.message.chomp}\n\n([link to source](#{event.args[:link]}))" : event.message.chomp
-              }
-            ]
-          }.to_json
+          if @config['alias']
+            author = event.author
+            title = event.args[:parent]
+          else
+            author = nil
+            title = "#{event.args[:parent]} by #{event.author}"
+          end
+
+            req.body = {
+              channel: @config['channel'],
+              alias: author,
+              attachments: [
+                {
+                  title: title,
+                  title_link: event.args[:parent_link],
+                  text: event.args[:link] ? "#{event.message.chomp}\n\n([link to source](#{event.args[:link]}))" : event.message.chomp
+                }
+              ]
+            }.to_json
         end
       end
     end
